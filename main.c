@@ -25,7 +25,7 @@ int kov_kep (bool const** kep, bool** kov, int w, int h)
                 szomszed = 0;
                 for (l = j - 1; l != l + 2; l++)
                 {
-                    if (l == k)
+                    if (l == j && k == i)
                         continue;
                     if (kep[l][k] == true)
                         szomszed++;
