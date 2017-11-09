@@ -2,42 +2,40 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int next_state (bool **sejt, int, int);
-int mellette (bool **sejt, int, int);
+int w, h;
+int kov_kep (bool const**, bool** kov, int w, int h);
 
 int main()
 {
-    return 0;
-}
-int next_state (bool **sejt, int magassag, int szelesseg)
-{
-    int i, j;
-    for (i = 0; i < magassag; i++)
-    {
-        for (j = 0; j < szelesseg; j++)
-        {
-            int szomszed = mellette(sejt, magassag, szelesseg);
-            if (szomszed < 2 || szomszed > 3)
-                sejt[i][j] = false;
-            else if ((szomszed == 2 && sejt[i][j] == true ) || szomszed == 3)
-                sejt[i][j] = true;
-        }
-    }
+    printf("");
     return 0;
 }
 
-int mellette(bool **sejt, int magassag, int szelesseg)
+int kov_kep (bool const** kep, bool** kov, int w, int h)
 {
-    int mennyi, i, j;
-    for (i = -1; i < 2; i++)
+    int i, j, k, l, szomszed;
+    for (i = 1; i != w + 1; i++)
     {
-        for (j = -1; j < 2; j++)
+        for (j= 1; j != h+1; j++)
         {
-            if ((i != 0) && (j != 0))
+            if (j == 0 || i == 0 || i == w+1 || j == h+1)
+                continue;
+            for (k = i-1; k != k+2; k++)
             {
-                if (sejt[i][j] == true)
-                    mennyi ++;
+                szomszed = 0;
+                for (l = j - 1; l != l + 2; l++)
+                {
+                    if (l == k)
+                        continue;
+                    if (kep[l][k] == true)
+                        szomszed++;
+                }
+                if (szomszed < 2 || szomszed > 3)
+                    kov [i][j] = false;
+                if ((szomszed == 2 && kep [i][j] == true) || (szomszed == 3))
+                    kov [i][j] = true;
             }
         }
     }
+    return 0;
 }
